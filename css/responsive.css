@@ -1,0 +1,16 @@
+@media screen and (max-width: 659px) {
+    .deck{
+        width: 100%;
+        min-height: 400px;
+        height: 100vw;
+        padding: 5vw
+    }
+    .deck .card{
+        height: 20vw;
+        width: 20vw;
+    }
+    .modal-content{
+        width:90%;
+    }
+
+}
