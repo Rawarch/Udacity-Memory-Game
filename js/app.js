@@ -1,26 +1,26 @@
 // Create a Timer object / learned from: https://www.youtube.com/watch?v=jRhB1IG7uAw tutorial
 
 function Timer(element) {
-var time = 0;
-var interval;
-var offset;
+let time = 0;
+let interval;
+let offset;
 
 function update(){
     time += delta();
-    var formattedTime = timeFormatter(time);
+    let formattedTime = timeFormatter(time);
     element.textContent= formattedTime ;
 };
 function delta(){ // Time passed 
-    var now = Date.now();
-    var timePassed = now - offset;
+    let now = Date.now();
+    let timePassed = now - offset;
     offset = now;
     return timePassed;
 }; 
 function timeFormatter(timeinMilliseconds){
-    var time = new Date(timeinMilliseconds); 
-    var minutes = time.getMinutes().toString();
-    var seconds = time.getSeconds().toString();
-    //var milliseconds = time.getMilliseconds().toString();
+    let time = new Date(timeinMilliseconds); 
+    let minutes = time.getMinutes().toString();
+    let seconds = time.getSeconds().toString();
+    //var milliseconds = time.getMilliseconds().toString(); - We don't need to measure miliSeconds here
 
     if (minutes.length <2 ){
         minutes = '0' + minutes; 
@@ -62,19 +62,19 @@ this.reset = function(){
 
 }
 
-var timer = document.querySelector(".timer");
+let timer = document.querySelector(".timer");
 
-var watch = new Timer(timer);
+let watch = new Timer(timer);
 
 // Setup Modal window to display
 
-var modal = document.getElementById('WinModal');
+let modal = document.getElementById('WinModal');
 
-var results = document.querySelector(".results");
+let results = document.querySelector(".results");
 
-var closeBtn = document.getElementsByClassName("close")[0];
+let closeBtn = document.getElementsByClassName("close")[0];
 
-var replayBtn = document.querySelector(".replayBtn");
+let replayBtn = document.querySelector(".replayBtn");
 
 replayBtn.onclick = function(){  
     restartGame() ;
@@ -96,7 +96,9 @@ window.onclick = function(event) {
 // Create a list that holds all of the cards
 
 
-const card_list = ["fa fa-diamond","fa fa-diamond","fa fa-paper-plane-o","fa fa-paper-plane-o","fa fa-bolt","fa fa-bolt","fa fa-cube","fa fa-cube","fa fa-anchor","fa fa-anchor","fa fa-leaf","fa fa-leaf","fa fa-bicycle","fa fa-bicycle","fa fa-bomb","fa fa-bomb"];
+let card_list = ["fa fa-diamond","fa fa-paper-plane-o","fa fa-bolt","fa fa-cube","fa fa-anchor","fa fa-leaf","fa fa-bicycle","fa fa-bomb"]; // Array with 8 uniqe card symbols
+
+card_list.push(...card_list); // doubling the array so we have 16 cards in total
 
 const cardContainer = document.querySelector(".deck");
 
@@ -217,13 +219,15 @@ restartButton.addEventListener("click",restartGame);
 function restartGame(){
       // delete cards
       cardContainer.innerHTML = "";
-
+      
+      
       // create cards
       init();
       // reset values
       watch.reset();
       matchedCards= [];
-  
+      openedCards = [];
+
       moves = 0;
       movesContainer.innerHTML = moves;
       starsContainer.innerHTML = `<li><i class="fa fa-star"></i></li>
@@ -248,7 +252,7 @@ function rating() {
 
         case 25: 
             starsContainer.innerHTML = `<li><i class="fa fa-star"></i></li>` ;
-            starNumber =1; 
+            starNumber = 1; 
         break;
 
     }
